@@ -1,10 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:meals/components/category_item.dart';
-import 'package:meals/dummy_data.dart';
+
+import '../components/category_item.dart';
+import '../dummy_data.dart';
 
 class CategoriesScreen extends StatelessWidget {
   const CategoriesScreen({Key? key}) : super(key: key);
@@ -29,7 +26,11 @@ class CategoriesScreen extends StatelessWidget {
         ),
         children: dummyCategories
             .map(
-              (data) => CategoryItem(data.title!, data.color!),
+              (data) => CategoryItem(
+                data.id!,
+                data.title!,
+                data.color!,
+              ),
             )
             .toList(),
       ),

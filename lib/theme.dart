@@ -4,6 +4,7 @@ import 'constance.dart';
 
 ThemeData getTheme() {
   return ThemeData(
+    // Colors
     primaryColor: primaryColor,
     scaffoldBackgroundColor: primaryColor,
 
@@ -14,6 +15,7 @@ ThemeData getTheme() {
       elevation: 0,
     ),
 
+    // Text
     textTheme: const TextTheme(
       titleLarge: TextStyle(
         color: Colors.black,
