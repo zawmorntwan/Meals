@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:meals/constance.dart';
 import 'package:meals/models/meal.dart';
+import 'package:meals/screens/meal_detail_screen.dart';
 
 class MealItem extends StatelessWidget {
+  final String id;
   final String title;
   final String imageUrl;
   final int duration;
   final Complexity complexity;
   final Affordability affordability;
   const MealItem({
+    required this.id,
     required this.title,
     required this.imageUrl,
     required this.duration,
@@ -27,9 +30,9 @@ class MealItem extends StatelessWidget {
     }
   }
 
-    String get affordabilityText {
+  String get affordabilityText {
     if (affordability == Affordability.affordable) {
-      return 'affordable';
+      return 'Affordable';
     } else if (complexity == Affordability.pricey) {
       return 'Pricey';
     } else {
@@ -37,12 +40,14 @@ class MealItem extends StatelessWidget {
     }
   }
 
-  void selectMeal() {}
+  void selectMeal(BuildContext context) {
+    Navigator.of(context).pushNamed(MealDetailScreen.routeName, arguments: id);
+  }
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: selectMeal,
+      onTap: () => selectMeal(context),
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
@@ -55,7 +60,7 @@ class MealItem extends StatelessWidget {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(15),
-                  child: photo(context, imageUrl),
+                  child: buildPhoto(context, imageUrl),
                 ),
                 Positioned(
                   bottom: 5,
@@ -176,7 +181,7 @@ class MealItem extends StatelessWidget {
   }
 }
 
-Widget photo(BuildContext context, String imageUrl) {
+Widget buildPhoto(BuildContext context, String imageUrl) {
   return ShaderMask(
     shaderCallback: (bounds) => const LinearGradient(
       colors: [
